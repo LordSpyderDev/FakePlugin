@@ -37,6 +37,13 @@ public class Fake extends JavaPlugin {
 			}
 			Bukkit.getServer().broadcastMessage(ChatColor.YELLOW + args[0] + getConfig().getString("FakeJoinJoin"));
 		}
+		if (cmd.getName().equalsIgnoreCase("fakeleave")) {
+			if (args.length == 0) {
+				sender.sendMessage(ChatColor.RED + getConfig().getString("FakeLeavePlayer"));
+				return true;
+			}
+			Bukkit.getServer().broadcastMessage(ChatColor.YELLOW + args[0] + getConfig().getString("FakeLeaveLeave"));
+		}
 		return true;
 	}
 }
