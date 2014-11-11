@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Fake extends JavaPlugin {
@@ -19,30 +20,48 @@ public class Fake extends JavaPlugin {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("fakeop")) {
-			if (args.length == 0) {
-				sender.sendMessage(ChatColor.RED + getConfig().getString("FakeOpPlayer"));
-				return true;
+			if (!sender.hasPermission(new Permission("fake.op"))){
+
+				sender.sendMessage(ChatColor.RED + getConfig().getString("FakeOpNoPermission"));
 			}
-			Player target = Bukkit.getServer().getPlayer(args[0]);
-			if (target == null) {
-				sender.sendMessage(ChatColor.RED + getConfig().getString("FakeOpPlayerNotFind") + args[0]);
-				return true;
+			if (sender.hasPermission(new Permission("fake.op"))) {
+				if (args.length == 0) {
+					sender.sendMessage(ChatColor.RED + getConfig().getString("FakeOpPlayer"));
+					return true;
+				}
+				Player target = Bukkit.getServer().getPlayer(args[0]);
+				if (target == null) {
+					sender.sendMessage(ChatColor.RED + getConfig().getString("FakeOpPlayerNotFind") + args[0]);
+					return true;
+				}
+				target.sendMessage(ChatColor.YELLOW + getConfig().getString("FakeOpNowOp"));
 			}
-			target.sendMessage(ChatColor.YELLOW + getConfig().getString("FakeOpNowOp"));
 		}
 		if (cmd.getName().equalsIgnoreCase("fakejoin")) {
-			if (args.length == 0) {
-				sender.sendMessage(ChatColor.RED + getConfig().getString("FakeJoinPlayer"));
-				return true;
+			if (!sender.hasPermission(new Permission("fake.join"))){
+
+				sender.sendMessage(ChatColor.RED + getConfig().getString("FakeJoinNoPermission"));
 			}
-			Bukkit.getServer().broadcastMessage(ChatColor.YELLOW + args[0] + getConfig().getString("FakeJoinJoin"));
-		}
-		if (cmd.getName().equalsIgnoreCase("fakeleave")) {
-			if (args.length == 0) {
-				sender.sendMessage(ChatColor.RED + getConfig().getString("FakeLeavePlayer"));
-				return true;
+			if (sender.hasPermission(new Permission("fake.join"))){
+				if (args.length == 0) {
+					sender.sendMessage(ChatColor.RED + getConfig().getString("FakeJoinPlayer"));
+					return true;
+				}
+				Bukkit.getServer().broadcastMessage(ChatColor.YELLOW + args[0] + getConfig().getString("FakeJoinJoin"));
 			}
-			Bukkit.getServer().broadcastMessage(ChatColor.YELLOW + args[0] + getConfig().getString("FakeLeaveLeave"));
+			if (cmd.getName().equalsIgnoreCase("fakeleave")) {
+				if (!sender.hasPermission(new Permission("fake.join"))){
+
+					sender.sendMessage(ChatColor.RED + getConfig().getString("FakeLeaveNoPermission"));
+				}
+				if (sender.hasPermission(new Permission("fake.join"))){
+					if (args.length == 0) {
+						sender.sendMessage(ChatColor.RED + getConfig().getString("FakeLeavePlayer"));
+						return true;
+					}
+					Bukkit.getServer().broadcastMessage(ChatColor.YELLOW + args[0] + getConfig().getString("FakeLeaveLeave"));
+				}
+			}
 		}
 		return true;
 	}
