@@ -49,18 +49,28 @@ public class Fake extends JavaPlugin {
 				}
 				Bukkit.getServer().broadcastMessage(ChatColor.YELLOW + args[0] + getConfig().getString("FakeJoinJoin"));
 			}
-			if (cmd.getName().equalsIgnoreCase("fakeleave")) {
-				if (!sender.hasPermission(new Permission("fake.join"))){
+		}
+		if (cmd.getName().equalsIgnoreCase("fakeleave")) {
+			if (!sender.hasPermission(new Permission("fake.leave"))){
 
-					sender.sendMessage(ChatColor.RED + getConfig().getString("FakeLeaveNoPermission"));
+				sender.sendMessage(ChatColor.RED + getConfig().getString("FakeLeaveNoPermission"));
+			}
+			if (sender.hasPermission(new Permission("fake.leave"))){
+				if (args.length == 0) {
+					sender.sendMessage(ChatColor.RED + getConfig().getString("FakeLeavePlayer"));
+					return true;
 				}
-				if (sender.hasPermission(new Permission("fake.join"))){
-					if (args.length == 0) {
-						sender.sendMessage(ChatColor.RED + getConfig().getString("FakeLeavePlayer"));
-						return true;
-					}
-					Bukkit.getServer().broadcastMessage(ChatColor.YELLOW + args[0] + getConfig().getString("FakeLeaveLeave"));
-				}
+				Bukkit.getServer().broadcastMessage(ChatColor.YELLOW + args[0] + getConfig().getString("FakeLeaveLeave"));
+			}
+		}
+		if (cmd.getName().equalsIgnoreCase("fakestop")) {
+			if (!sender.hasPermission(new Permission("fake.stop"))){
+
+				sender.sendMessage(ChatColor.RED + getConfig().getString("FakeStopNoPermission"));
+			}
+			if (sender.hasPermission(new Permission("fake.stop"))){
+				Bukkit.getServer().broadcastMessage(ChatColor.YELLOW + getConfig().getString("FakeStop"));
+				return true;
 			}
 		}
 		return true;
