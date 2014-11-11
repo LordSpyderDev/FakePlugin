@@ -1,0 +1,26 @@
+#Created by LordSpyder
+#If you use the quotes ['] insert 2 quotes or the plugin crash
+
+FakeOpPlayer: 'Please specify a player!'
+
+FakeOpPlayerNotFind: 'Could not find player'
+
+FakeOpNowOp: 'You are now op!'
+
+FakeJoinPlayer: 'Please specify a name!'
+
+FakeJoinJoin: ' joined the game.'
+
+FakeLeavePlayer: 'Please specify a name!'
+
+FakeLeaveLeave: ' left the game'
+
+FakeStop: 'Stopping the server...'
+
+FakeOpNoPermission: 'You don''t have permission to use this command!'
+
+FakeJoinNoPermission: 'You don''t have permission to use this command!'
+
+FakeLeaveNoPermission: 'You don''t have permission to use this command!'
+
+FakeStopNoPermission: 'You don''t have permission to use this command!'
