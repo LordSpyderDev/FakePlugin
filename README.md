@@ -1,0 +1,4 @@
+FakePlugin
+==========
+
+Troll your players !
