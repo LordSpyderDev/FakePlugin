@@ -1,0 +1,18 @@
+name: FakePlugin
+version: 1.3
+main: me.lordspyder.fake.Fake
+description: FakePlugin Troll your player!
+ 
+commands:
+    fakeop:
+        usage: /<command>
+        description: FakeOp message
+    fakejoin:
+        usage: /<command>
+        description: FakeJoin message
+    fakeleave:
+        usage: /<command>
+        description: FakeLeave message
+    fakestop:
+        usage: /<command>
+        description: FakeStop message
